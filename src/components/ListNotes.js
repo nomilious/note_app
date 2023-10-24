@@ -16,7 +16,7 @@ function ListNotes() {
 
     return (
         <ConfigProvider theme={{ algorithm: [theme.defaultAlgorithm, theme.compactAlgorithm], }}>
-            <div className="list-container">
+            <div className="scrollable-container">
                 <List
                     bordered
                     header={<div>Заметки</div>}

@@ -1,9 +1,9 @@
-import EditNote from "./EditNote"
-import ListNotes from "./ListNotes"
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {Col, Row, Spin, Alert} from 'antd';
 import { setLoading, setData, setError } from '../reduxStore/actions';
+import EditNote from "./EditNote"
+import ListNotes from "./ListNotes"
 import Note from "../note"
 
 function Body() {
@@ -24,7 +24,10 @@ function Body() {
                 const rawArray = fileContent.split('\n')
                     .map(note => note.replace(/\\n/g, '\n'));
                 const notesArray: Note = rawArray.map((note) => {
-                    const [title, description] = note.split('\n');
+                    const title = note.split("\n")[0]
+                    const lines = note.split("\n").slice(1);
+
+                    const description = lines.join("\n");
                     return { title, description };
                 });
                 dispatch(setData(notesArray));

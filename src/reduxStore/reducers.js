@@ -20,9 +20,34 @@ const rootReducer = (state = initialState, action) => {
             return /* updated state */;
         case actionTypes.LOAD_DATA:
             return { ...state, data: action.payload };
-        case actionTypes.TOGGLE_THEME:
-            // Handle set theme logic
-            return /* updated state */;
+        case actionTypes.UPDATE_NOTE_TITLE:
+            const indexT = state.selectedNote;
+            const newTitle = action.payload;
+            const updatedNoteT = {
+                ...state.data[indexT],
+                title: newTitle,
+            };
+            const updatedDataT = [
+                ...state.data.slice(0, indexT),
+                updatedNoteT,
+                ...state.data.slice(indexT + 1)
+            ];
+
+            return {...state, data: updatedDataT};
+        case actionTypes.UPDATE_NOTE_DESCRIPTION:
+            const indexD = state.selectedNote;
+            const newDescription = action.payload;
+            const updatedNoteD = {
+                ...state.data[indexD],
+                description: newDescription,
+            };
+            const updatedDataD = [
+                ...state.data.slice(0, indexD),
+                updatedNoteD,
+                ...state.data.slice(indexD + 1)
+            ];
+
+            return {...state, data: updatedDataD}
         case actionTypes.TOGGLE_LOADING:
             return { ...state, loading: action.payload };
         case actionTypes.DELETE_NOTE:

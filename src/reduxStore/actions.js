@@ -5,11 +5,21 @@ export const updateNote = (note) =>({
     type: actionTypes.UPDATE_NOTE,
     payload: note
 })
-
 export const setError = (note) =>({
     type: actionTypes.SET_ERROR,
     payload: note
 })
+
+export const updateNoteTitle = (newTitle) => ({
+    type: actionTypes.UPDATE_NOTE_TITLE,
+    payload: newTitle,
+})
+
+export const updateNoteDescription = (newDescription) => ({
+    type: actionTypes.UPDATE_NOTE_DESCRIPTION,
+    payload: newDescription,
+})
+
 
 export const createNote = (note) => ({
     type:  actionTypes.CREATE_NOTE,

@@ -1,18 +1,25 @@
 import {Card, Typography} from "antd";
-import {useSelector } from 'react-redux';
+import {useSelector, useDispatch } from 'react-redux';
+import {updateNoteDescription, updateNoteTitle} from "../reduxStore/actions";
+
 
 function EditNote() {
-    // const dispatch = useDispatch();
+    const dispatch = useDispatch();
     const selectedNote = useSelector(state => state.selectedNote)
     const data = useSelector(state => state.data)
     const note = data[selectedNote];
+    const handleDescriptionChange = newDescription => {
+        dispatch(updateNoteDescription(newDescription));
+    };
+
+    const handleTitleChange = newTitle => {
+        dispatch(updateNoteTitle(newTitle));
+    };
 
     return (
-        <Card
-            title={<a href="#">More</a>}
-        >
-            <Typography.Title level={2}>{note.title}</Typography.Title>
-            <Typography.Text>{note.description}</Typography.Text>
+        <Card title={<a href="#">More</a>} style={{ borderRadius: 10, boxShadow: '0px 4px 20px rgba(0, 0, 0, 0.1)' }}>
+            <Typography.Title level={2} editable={{onChange: handleTitleChange}}>{note.title}</Typography.Title>
+            <Typography.Text editable={{onChange: handleDescriptionChange}}>{note.description}</Typography.Text>
         </Card>
     )
 }

@@ -1,31 +1,38 @@
 import EditNote from "./EditNote"
 import ListNotes from "./ListNotes"
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import {Col, Row, Spin} from 'antd';
-import { setGameDetails, setLoading, setData } from '../reduxStore/actions';
+import {Col, Row, Spin, Alert} from 'antd';
+import { setLoading, setData, setError } from '../reduxStore/actions';
+import Note from "../note"
 
 function Body() {
     const dispatch = useDispatch();
     const loading = useSelector(state => state.loading);
+    const error = useSelector(state => state.error);
 
     useEffect(() => {
         console.log("Fetching data from file...");
         dispatch(setLoading(true));
         dispatch(setData(null));
 
+        // TODO fix the error: if there is no file, it returns the index.html....
         // Fetch data
         fetch('./data.txt')
-            .then((response) => response.text())
-            .then((fileContent) => {
-                const notesArray = fileContent.split('\n')
+            .then(response => response.text())
+            .then(fileContent => {
+                const rawArray = fileContent.split('\n')
                     .map(note => note.replace(/\\n/g, '\n'));
+                const notesArray: Note = rawArray.map((note) => {
+                    const [title, description] = note.split('\n');
+                    return { title, description };
+                });
                 dispatch(setData(notesArray));
                 dispatch(setLoading(false));
             })
             .catch((error) => {
-                // TODO replace with ui alert
                 console.error('Error loading notes from file:', error);
+                dispatch(setError(error));
                 dispatch(setLoading(false));
             });
     }, [dispatch])
@@ -36,6 +43,8 @@ function Body() {
                 <Spin size="large" />
             </div>
         );
+    if (error)
+        return <Alert type="error" showIcon message="Error" description={`Error: ${error}`}/>;
 
     return (
         <>

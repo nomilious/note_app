@@ -1,8 +1,13 @@
-
 import  actionTypes from "./action_types"
+import Note from "../note"
 
 export const updateNote = (note) =>({
     type: actionTypes.UPDATE_NOTE,
+    payload: note
+})
+
+export const setError = (note) =>({
+    type: actionTypes.SET_ERROR,
     payload: note
 })
 
@@ -11,12 +16,12 @@ export const createNote = (note) => ({
     payload: note,
 })
 
-export const setData = (data) => ({
+export const setData = (data: Note[]) => ({
     type:  actionTypes.LOAD_DATA,
     payload: data,
 });
 
-export const setNote = (note)=> ({
+export const setSelectedNote = (note)=> ({
     type:  actionTypes.SELECT_NOTE,
     payload: note,
 })

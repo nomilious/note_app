@@ -1,9 +1,9 @@
 import  actionTypes from "./action_types"
-// TODO add error to redux
+
 const initialState = {
     data: null,
     loading: true,
-    error: false,
+    error: null,
     selectedNote: 0,
     theme: "defaultAlgorithm"
 };
@@ -14,8 +14,7 @@ const rootReducer = (state = initialState, action) => {
             // Handle update note logic
             return /* updated state */;
         case actionTypes.SELECT_NOTE:
-            // Handle select note logic
-            return /* updated state */;
+            return { ...state, selectedNote: action.payload };
         case actionTypes.CREATE_NOTE:
             // Handle create note logic
             return /* updated state */;
@@ -29,6 +28,8 @@ const rootReducer = (state = initialState, action) => {
         case actionTypes.DELETE_NOTE:
             // Handle delete note logic
             return /* updated state */;
+        case actionTypes.SET_ERROR:
+            return { ...state, loading: action.payload };
         default:
             return state;
     }

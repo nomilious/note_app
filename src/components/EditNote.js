@@ -1,7 +1,8 @@
 import React from "react";
 import { Card, Input, Divider } from "antd";
 import { useSelector, useDispatch } from "react-redux";
-import { updateNoteDescription, updateNoteTitle } from "../reduxStore/actions";
+import {createNote, setSelectedNote, updateNoteDescription, updateNoteTitle} from "../reduxStore/actions";
+import {FormOutlined} from "@ant-design/icons";
 
 function EditNote() {
     const dispatch = useDispatch();
@@ -16,11 +17,20 @@ function EditNote() {
     const handleTitleChange = (newTitle) => {
         dispatch(updateNoteTitle(newTitle));
     };
+    const createNewNote = () => {
+        dispatch(createNote())
+        const newNoteIndex = data.length; // Index of the newly created note
+        dispatch(setSelectedNote(newNoteIndex))
+    }
 
     return (
         <Card
             className={"scrollable-container"}
-            title={<a href="#">More</a>}
+            title={
+                <div style={{ cursor: "pointer" }} onClick={createNewNote}>
+                    <FormOutlined />
+                </div>
+            }
             style={{ borderRadius: 10, boxShadow: "0px 4px 20px rgba(0, 0, 0, 0.1)" }}
         >
             <Input

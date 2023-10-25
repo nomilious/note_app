@@ -33,7 +33,10 @@ function ListNotes() {
                                 }}
                             >
                                 <List.Item.Meta
-                                    title={<Typography.Paragraph ellipsis>{item.title}</Typography.Paragraph>}
+                                    title={
+                                    <Typography.Paragraph ellipsis>
+                                        {item.title || "Нет заголовка"}
+                                    </Typography.Paragraph>}
                                     description={
                                         <Typography.Paragraph ellipsis>
                                             {item.description || 'Нет тела'}

@@ -50,8 +50,12 @@ const rootReducer = (state = initialState, action) => {
             // Handle delete note logic
             return /* updated state */;
         case actionTypes.CREATE_NOTE:
-            // Handle create note logic
-            return /* updated state */;
+            const newNote = {
+                title: "",
+                description: ""
+            };
+            const updatedData = state.data ? [...state.data, newNote] : [newNote];
+            return {...state, data: updatedData}
         default:
             return state;
     }

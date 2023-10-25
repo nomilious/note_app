@@ -9,6 +9,7 @@ function EditNote() {
     const selectedNote = useSelector((state) => state.selectedNote);
     const data = useSelector((state) => state.data);
     const note = data[selectedNote];
+    const isLastNoteEmpty = data.length > 0 && data[data.length - 1].title === "" && data[data.length - 1].description === "";
 
     const handleDescriptionChange = (newDescription) => {
         dispatch(updateNoteDescription(newDescription));
@@ -18,6 +19,8 @@ function EditNote() {
         dispatch(updateNoteTitle(newTitle));
     };
     const createNewNote = () => {
+        if (isLastNoteEmpty)// if there is already an created empty note
+            return
         dispatch(createNote())
         const newNoteIndex = data.length; // Index of the newly created note
         dispatch(setSelectedNote(newNoteIndex))
@@ -27,7 +30,7 @@ function EditNote() {
         <Card
             className={"scrollable-container"}
             title={
-                <div style={{ cursor: "pointer" }} onClick={createNewNote}>
+                <div style={{ cursor: isLastNoteEmpty ? "not-allowed" : "pointer", color: isLastNoteEmpty ? "#ccc" : "inherit" }} onClick={createNewNote}>
                     <FormOutlined />
                 </div>
             }

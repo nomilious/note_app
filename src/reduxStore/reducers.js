@@ -47,8 +47,9 @@ const rootReducer = (state = initialState, action) => {
         case actionTypes.SET_ERROR:
             return { ...state, loading: action.payload };
         case actionTypes.DELETE_NOTE:
-            // Handle delete note logic
-            return /* updated state */;
+            const indexToDelete = state.selectedNote;
+            const updatedDataAfterDeletion = state.data.filter((_, index) => index !== indexToDelete);
+            return { ...state, data: updatedDataAfterDeletion };
         case actionTypes.CREATE_NOTE:
             const newNote = {
                 title: "",

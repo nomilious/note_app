@@ -1,4 +1,0 @@
-.scrollable-container {
-    max-height:82vh; /* Set the list container to take 100% of the viewport height */
-    overflow-y: auto; /* Enable vertical scrolling when the content overflows */
-}

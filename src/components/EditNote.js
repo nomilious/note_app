@@ -1,5 +1,5 @@
 import React from "react";
-import {Card, Input, Divider, Button, ConfigProvider, theme} from "antd";
+import {Card, Input, Divider, Button} from "antd";
 import { useSelector, useDispatch } from "react-redux";
 import {createNote, deleteNote, setSelectedNote, updateNoteDescription, updateNoteTitle} from "../reduxStore/actions";
 import {DeleteOutlined, FormOutlined} from "@ant-design/icons";
@@ -12,6 +12,7 @@ function EditNote() {
     const isNewNoteEmpty = data[0].title === "" && data[0].description === "";
     const cantDelete = data.length <=1;
 
+    // Handlers for inserting text into note
     const handleDescriptionChange = (newDescription) => {
         dispatch(updateNoteDescription(newDescription));
     };
@@ -19,6 +20,8 @@ function EditNote() {
     const handleTitleChange = (newTitle) => {
         dispatch(updateNoteTitle(newTitle));
     };
+
+    // Handlers for buttons clicks
     const createNewNote = () => {
         dispatch(createNote())
         dispatch(setSelectedNote(0))
@@ -32,27 +35,26 @@ function EditNote() {
             <Card
                 title={
                     <div style={{ display: "flex", alignItems: "center" }}>
+                        {/* Button for creating a new note */}
                         <Button
-                            icon = {<FormOutlined />}
-                            type={"text"}
+                            icon = {<FormOutlined />} type={"text"}
                             style={{color: isNewNoteEmpty ? "#ccc" : "inherit" }}
-                            onClick={createNewNote}
-                            disabled={isNewNoteEmpty}
+                            onClick={createNewNote} disabled={isNewNoteEmpty}
                         >
-                            New Note
+                            Создать
                         </Button>
+                        {/* Button for deleting the selected note */}
                         <Button
-                            icon={<DeleteOutlined />}
-                            danger type={"text"}
+                            icon={<DeleteOutlined />} danger type={"text"}
                             style={{color: cantDelete ? "#ccc" : "inherit", marginLeft: "auto",}}
-                            onClick={handleDeleteNote}
-                            disabled={cantDelete}
+                            onClick={handleDeleteNote} disabled={cantDelete}
                         >
-                            Delete Note
+                            Удалить
                         </Button>
                     </div>
                 }
             >
+                {/* EDITABLE Field for note title. It can be edited!! */}
                 <Input
                     value={note.title}
                     bordered={false}
@@ -60,6 +62,7 @@ function EditNote() {
                     style={{ marginBottom: 16, fontSize: "20px" }}
                 />
                 <Divider />
+                {/* EDITABLE Field for note description. It can be edited!! */}
                 <Input.TextArea
                     value={note.description}
                     bordered={false}

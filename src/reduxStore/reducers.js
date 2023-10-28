@@ -3,10 +3,10 @@ import {updateDatabase} from "../note";
 import type {Note} from "../note";
 
 const initialState = {
-    data: null,
-    loading: true,
-    error: null,
-    selectedNote: 0,
+    data: null,             // Array of notes data
+    loading: true,          // Indicates whether data is loading
+    error: null,            // Stores any errors
+    selectedNote: 0,        // Index of the currently selected note
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -14,6 +14,7 @@ const rootReducer = (state = initialState, action) => {
         case actionTypes.DOWNLOAD_DATA:
             return { ...state, data: action.payload };
         case actionTypes.UPDATE_NOTE_TITLE:
+            // Update the title of the selected note in the data and in the database(localStorage)
             const indexT = state.selectedNote;
             const newTitle = action.payload;
             const updatedNoteT = {
@@ -28,6 +29,7 @@ const rootReducer = (state = initialState, action) => {
             updateDatabase(updatedDataT);
             return {...state, data: updatedDataT};
         case actionTypes.UPDATE_NOTE_DESCRIPTION:
+            // Update the description of the selected note in the data and in the database(localStorage)
             const indexD = state.selectedNote;
             const newDescription = action.payload;
             const updatedNoteD = {
@@ -48,6 +50,7 @@ const rootReducer = (state = initialState, action) => {
         case actionTypes.SET_ERROR:
             return { ...state, loading: action.payload };
         case actionTypes.DELETE_NOTE:
+            // Delete the selected note, update the database(localStorage), and select another note
             let indexToDelete = state.selectedNote;
             const updatedDataAfterDeletion = state.data.filter((_, index) => index !== indexToDelete);
             // select another note
@@ -59,6 +62,7 @@ const rootReducer = (state = initialState, action) => {
             updateDatabase(updatedDataAfterDeletion);
             return { ...state, data: updatedDataAfterDeletion, selectedNote: indexToDelete };
         case actionTypes.CREATE_NOTE:
+            // Create a new empty note and add it to the beginning array
             const newNote: Note = {
                 title: "",
                 description: ""

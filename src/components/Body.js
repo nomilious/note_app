@@ -36,15 +36,19 @@ function Body() {
         }
     }, [dispatch])
 
+    // Render loading spinner while data is being fetched
     if (loading)
         return (
             <div style={{textAlign: "center"}}>
                 <Spin size="large" />
             </div>
         );
+
+    // Render error message if there is an error fetching data
     if (error)
         return <Alert type="error" showIcon message="Error" description={`Error: ${error}`}/>;
 
+    // Render EditNote and ListNotes components within a responsive grid layout
     return (
         <>
             <Row gutter={[{xs: 2, sm: 8, md: 16}, {xs: 2, sm: 8, md: 16}]}>

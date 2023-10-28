@@ -1,5 +1,5 @@
 import  actionTypes from "./action_types"
-import Note from "../note"
+import {Note} from "../note"
 
 export const setError = error =>({
     type: actionTypes.SET_ERROR,

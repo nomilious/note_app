@@ -1,70 +1,36 @@
-# Getting Started with Create React App
+# Note-app
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Сайт разработан на ReactJs используя библиотеку Ant Design.
 
-## Available Scripts
+## Описание
+Веб-приложение заметок «NoteMe». По дизайну похожее на Apple Notes. 
+В нем можно создавать, редактирвать и удалять заметки. 
+Все сихронизируется с localStorage.
 
-In the project directory, you can run:
+## Структура
+- `src/redux` - настройка Redux Store
+- `src/components/ListNotes.js` - оторбажается слева, поле отображающее все сохранненные заметки
+- `src/components/EditNote.js` - отображается справа от списка `ListNotes`, Поле в котором полностью можно изменить заметку. не надо нажимать никаких кнопок для входа в режим редактирования, просто вводишь текс и все.
+- `src/components/Body.js` - оболочка для верхних двух элементов.
+- `src/components/Navbar.js` - шапка сайта.
+- `src/components/Footer.js` - футер сайта.
+- `src/note.js` - определение типа "Note" и нужных функций для работы с ним.
 
-### `npm start`
+## Важные моменты:
+- Загрузка даных в прилодение происходит в `Body.js`.
+- Загрузка данных из приложения происходит при каждом из действий: удалени, изменение заголовка и/или описания. При создании данные не синхронизируются !
+- Была выбрана загрузка данных в `localStorage`, т.к без бэкенда список алтернатив очень невелик. Данный способ показался лучшим.
+- При создании заметки, невозможно создать более одной пустой заметки.
+- Нельзя удалять все заметки, кнопка становится некликабельной если осталось менее 2х заметок.
+- `LisNotes` и `EditNotes` отображаются не в категории full-height, в какойто момент там появляются scrollbars.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Как запустить
+ `npm install`
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Загрузка всех зависимостей необходимых для запуска.
 
-### `npm test`
+ `npm start`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Запускает проект на локалхосте. 
+Нажми [http://localhost:3000](http://localhost:3000) чтобы открыть сайт.
 
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)

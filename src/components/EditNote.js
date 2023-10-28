@@ -28,46 +28,46 @@ function EditNote() {
     };
 
     return (
-        <Card
-            className={"scrollable-container"}
-            title={
-                <div style={{ display: "flex", alignItems: "center" }}>
-                    <Button
-                        icon = {<FormOutlined />}
-                        type="danger"
-                        style={{color: isNewNoteEmpty ? "#ccc" : "inherit" }}
-                        onClick={createNewNote}
-                        disabled={isNewNoteEmpty}
-                    >
-                        New Note
-                    </Button>
-                    <Button
-                        icon={<DeleteOutlined />}
-                        type="danger"
-                        style={{color: cantDelete ? "#ccc" : "inherit", marginLeft: "auto",}}
-                        onClick={handleDeleteNote}
-                        disabled={cantDelete}
-                    >
-                        Delete Note
-                    </Button>
-                </div>
-            }
-            style={{ borderRadius: 10, boxShadow: "0px 4px 20px rgba(0, 0, 0, 0.1)" }}
-        >
-            <Input
-                value={note.title}
-                bordered={false}
-                onChange={(e) => handleTitleChange(e.target.value)}
-                style={{ marginBottom: 16, fontSize: "20px" }}
-            />
-            <Divider />
-            <Input.TextArea
-                value={note.description}
-                bordered={false}
-                autoSize={true}
-                onChange={(e) => handleDescriptionChange(e.target.value)}
-            />
-        </Card>
+        <div className="scrollable-container" style={{ borderRadius: 10, boxShadow: "0px 4px 20px rgba(0, 0, 0, 0.1)" }}>
+            <Card
+                title={
+                    <div style={{ display: "flex", alignItems: "center" }}>
+                        <Button
+                            icon = {<FormOutlined />}
+                            type={"text"}
+                            style={{color: isNewNoteEmpty ? "#ccc" : "inherit" }}
+                            onClick={createNewNote}
+                            disabled={isNewNoteEmpty}
+                        >
+                            New Note
+                        </Button>
+                        <Button
+                            icon={<DeleteOutlined />}
+                            danger type={"text"}
+                            style={{color: cantDelete ? "#ccc" : "inherit", marginLeft: "auto",}}
+                            onClick={handleDeleteNote}
+                            disabled={cantDelete}
+                        >
+                            Delete Note
+                        </Button>
+                    </div>
+                }
+            >
+                <Input
+                    value={note.title}
+                    bordered={false}
+                    onChange={(e) => handleTitleChange(e.target.value)}
+                    style={{ marginBottom: 16, fontSize: "20px" }}
+                />
+                <Divider />
+                <Input.TextArea
+                    value={note.description}
+                    bordered={false}
+                    autoSize={true}
+                    onChange={(e) => handleDescriptionChange(e.target.value)}
+                />
+            </Card>
+        </div>
     );
 }
 

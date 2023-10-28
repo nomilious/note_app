@@ -29,10 +29,6 @@ export const setLoading = loading => ({
     type:  actionTypes.TOGGLE_LOADING,
     payload: loading,
 })
-export const setTheme = theme => ({
-    type: actionTypes.TOGGLE_THEME,
-    payload: theme
-})
 export  const deleteNote = note => ({
     type: actionTypes.DELETE_NOTE,
     payload: note,

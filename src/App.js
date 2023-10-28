@@ -1,5 +1,4 @@
 import React from 'react';
-import { Space } from 'antd';
 import Navbar from "./components/Navbar";
 import Body from "./components/Body";
 import './App.css';

@@ -7,7 +7,6 @@ const initialState = {
     loading: true,
     error: null,
     selectedNote: 0,
-    theme: "defaultAlgorithm"
 };
 
 const rootReducer = (state = initialState, action) => {

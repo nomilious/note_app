@@ -1,5 +1,5 @@
 import React from "react";
-import {Card, Input, Divider, Button} from "antd";
+import {Card, Input, Divider, Button, ConfigProvider, theme} from "antd";
 import { useSelector, useDispatch } from "react-redux";
 import {createNote, deleteNote, setSelectedNote, updateNoteDescription, updateNoteTitle} from "../reduxStore/actions";
 import {DeleteOutlined, FormOutlined} from "@ant-design/icons";

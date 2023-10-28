@@ -25,7 +25,7 @@ function Body() {
             }
             // If there are no notes in local storage, initialize with a default array Note[]
             else {
-                updateDatabase(defaultNotes)
+                updateDatabase(defaultNotes);
                 dispatch(setData(defaultNotes));
             }
         } catch (error) {

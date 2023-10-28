@@ -10,6 +10,7 @@ export const defaultNotes: Note[] = [
 export function updateDatabase(data) {
     localStorage.setItem("notes", JSON.stringify(data));
 }
+// not used, but earlier was used
 export const deserializeData = data => {
     return data.split('\n').map(note => {
         const [title, ...lines] = note.replace(/\\n/g, '\n').split('\n');
@@ -17,6 +18,7 @@ export const deserializeData = data => {
         return { title, description };
     });
 }
+// not used, but earlier was used
 export const serializeData = data => {
     return data.map(note => {
         const {title, description} = note;

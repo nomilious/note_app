@@ -26,10 +26,7 @@ function ListNotes() {
                             <List.Item
                                 key={index}
                                 onClick={() => handleNoteClick(index)}
-                                style={{
-                                    cursor: 'pointer',
-                                    backgroundColor: isSelected ? '#f0f0f0' : 'white',
-                                }}
+                                style={{cursor: 'pointer', backgroundColor: isSelected ? '#f0f0f0' : 'white',}}
                             >
                                 <List.Item.Meta
                                     title={

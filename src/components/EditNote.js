@@ -9,7 +9,7 @@ function EditNote() {
     const selectedNote = useSelector((state) => state.selectedNote);
     const data = useSelector((state) => state.data);
     const note = data[selectedNote];
-    const isLastNoteEmpty = data.length > 0 && data[data.length - 1].title === "" && data[data.length - 1].description === "";
+    const isNewNoteEmpty = data[0].title === "" && data[0].description === "";
     const cantDelete = data.length <=1;
 
     const handleDescriptionChange = (newDescription) => {
@@ -21,8 +21,7 @@ function EditNote() {
     };
     const createNewNote = () => {
         dispatch(createNote())
-        const newNoteIndex = data.length; // Index of the newly created note
-        dispatch(setSelectedNote(newNoteIndex))
+        dispatch(setSelectedNote(0))
     }
     const handleDeleteNote = () => {
         dispatch(deleteNote(selectedNote));
@@ -36,20 +35,16 @@ function EditNote() {
                     <Button
                         icon = {<FormOutlined />}
                         type="danger"
-                        style={{
-                            color: isLastNoteEmpty ? "#ccc" : "inherit" }}
+                        style={{color: isNewNoteEmpty ? "#ccc" : "inherit" }}
                         onClick={createNewNote}
-                        disabled={isLastNoteEmpty}
+                        disabled={isNewNoteEmpty}
                     >
                         New Note
                     </Button>
                     <Button
                         icon={<DeleteOutlined />}
                         type="danger"
-                        style={{
-                            color: cantDelete ? "#ccc" : "inherit",
-                            marginLeft: "auto",
-                        }}
+                        style={{color: cantDelete ? "#ccc" : "inherit", marginLeft: "auto",}}
                         onClick={handleDeleteNote}
                         disabled={cantDelete}
                     >

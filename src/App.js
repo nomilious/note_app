@@ -1,15 +1,23 @@
 import React from 'react';
 import { Space } from 'antd';
-import Nabbar from  "./components/Navbar";
+import Navbar from "./components/Navbar";
 import Body from "./components/Body";
 import './App.css';
+import Footer from "./components/Footer";
 
 function App() {
     return (
-        <Space direction="vertical" size={20} style={{ width: '100%' }}>
-            <Nabbar />
-            <Body />
-        </Space>
+        <div className="wrapper">
+            <div className="navbar">
+                <Navbar />
+            </div>
+            <div className="content">
+                <Body />
+            </div>
+            <div className="footer">
+                <Footer />
+            </div>
+        </div>
     );
 }
 

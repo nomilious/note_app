@@ -54,9 +54,7 @@ const rootReducer = (state = initialState, action) => {
             // select another note
             if (indexToDelete > 0) {
                 indexToDelete-=1
-            } else if (state.data.length > 1) {
-                indexToDelete = state.data.length-2;
-            } else {
+            } else  {
                 indexToDelete = 0
             }
             updateDatabase(updatedDataAfterDeletion);
@@ -66,7 +64,7 @@ const rootReducer = (state = initialState, action) => {
                 title: "",
                 description: ""
             };
-            const updatedData = state.data ? [...state.data, newNote] : [newNote];
+            const updatedData = state.data ? [newNote, ...state.data] : [newNote];
             return {...state, data: updatedData}
         default:
             return state;

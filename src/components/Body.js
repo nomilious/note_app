@@ -22,8 +22,9 @@ function Body() {
             // get data from localstorage
             if (storedData) {
                 dispatch(setData(JSON.parse(storedData)))
-            } else {
-                // If there are no notes in local storage, initialize with a default array
+            }
+            // If there are no notes in local storage, initialize with a default array Note[]
+            else {
                 updateDatabase(defaultNotes)
                 dispatch(setData(defaultNotes));
             }

@@ -2,6 +2,7 @@ import React from 'react';
 import { List, Typography } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 import {setSelectedNote} from '../reduxStore/actions';
+import {formatDateTime, isSameDay} from "../note";
 
 function ListNotes() {
     const dispatch = useDispatch();
@@ -36,8 +37,14 @@ function ListNotes() {
                                     </Typography.Paragraph>}
                                 description={
                                     <Typography.Paragraph ellipsis>
-                                        {item.description || 'Нет тела'}
-                                    </Typography.Paragraph>
+                                        {/*if it's the same day as today, show only time*/}
+                                        <Typography.Text italic={true}>
+                                            {
+                                                isSameDay(item.dateTime)
+                                                ? formatDateTime(item.dateTime).split(" ")[1]
+                                                :formatDateTime(item.dateTime)
+                                            }
+                                        </Typography.Text> {item.description || 'Нет тела'}</Typography.Paragraph>
                                 }
                             />
                         </List.Item>

@@ -65,7 +65,8 @@ const rootReducer = (state = initialState, action) => {
             // Create a new empty note and add it to the beginning array
             const newNote: Note = {
                 title: "",
-                description: ""
+                description: "",
+                dateTime: Date.now()
             };
             const updatedData = state.data ? [newNote, ...state.data] : [newNote];
             return {...state, data: updatedData}

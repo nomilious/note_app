@@ -1,5 +1,5 @@
 import React from "react";
-import {Card, Input, Divider, Button} from "antd";
+import {Card, Input, Button, Divider} from "antd";
 import { useSelector, useDispatch } from "react-redux";
 import {createNote, deleteNote, setSelectedNote, updateNoteDescription, updateNoteTitle} from "../reduxStore/actions";
 import {DeleteOutlined, FormOutlined} from "@ant-design/icons";
@@ -57,6 +57,7 @@ function EditNote() {
                 {/* EDITABLE Field for note title. It can be edited!! */}
                 <Input
                     value={note.title}
+                    placeholder={"Нет заголовка"}
                     bordered={false}
                     onChange={(e) => handleTitleChange(e.target.value)}
                     style={{ marginBottom: 16, fontSize: "20px" }}
@@ -65,6 +66,7 @@ function EditNote() {
                 {/* EDITABLE Field for note description. It can be edited!! */}
                 <Input.TextArea
                     value={note.description}
+                    placeholder={"Нет тела"}
                     bordered={false}
                     autoSize={true}
                     onChange={(e) => handleDescriptionChange(e.target.value)}

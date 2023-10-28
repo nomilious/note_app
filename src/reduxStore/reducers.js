@@ -46,9 +46,13 @@ const rootReducer = (state = initialState, action) => {
         case actionTypes.TOGGLE_LOADING:
             return { ...state, loading: action.payload };
         case actionTypes.SELECT_NOTE:
+            // IDEA: delete created note while switching to another if it's empty
+            // if (state.selectedNote === 0 && action.payload!== 0 && !state.data[0].title && !state.data[0].description) {
+            //     return { ...state, selectedNote: action.payload-1, data: state.data.slice(1) };
+            // }
             return { ...state, selectedNote: action.payload };
         case actionTypes.SET_ERROR:
-            return { ...state, loading: action.payload };
+            return { ...state, error: action.payload };
         case actionTypes.DELETE_NOTE:
             // Delete the selected note, update the database(localStorage), and select another note
             let indexToDelete = state.selectedNote;

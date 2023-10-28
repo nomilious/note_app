@@ -26,13 +26,6 @@ function EditNote() {
     }
     const handleDeleteNote = () => {
         dispatch(deleteNote(selectedNote));
-        if (selectedNote > 0) {
-            dispatch(setSelectedNote(selectedNote - 1));
-        } else if (data.length > 1) {
-            dispatch(setSelectedNote(data.length-2));
-        } else {
-            dispatch(setSelectedNote(0));
-        }
     };
 
     return (
@@ -44,7 +37,6 @@ function EditNote() {
                         icon = {<FormOutlined />}
                         type="danger"
                         style={{
-                            cursor: isLastNoteEmpty ? "not-allowed" : "pointer",
                             color: isLastNoteEmpty ? "#ccc" : "inherit" }}
                         onClick={createNewNote}
                         disabled={isLastNoteEmpty}
@@ -55,7 +47,6 @@ function EditNote() {
                         icon={<DeleteOutlined />}
                         type="danger"
                         style={{
-                            cursor: isLastNoteEmpty ? "not-allowed" : "pointer",
                             color: cantDelete ? "#ccc" : "inherit",
                             marginLeft: "auto",
                         }}

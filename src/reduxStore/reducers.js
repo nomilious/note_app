@@ -1,4 +1,6 @@
 import  actionTypes from "./action_types"
+import {updateDatabase} from "../note";
+import type {Note} from "../note";
 
 const initialState = {
     data: null,
@@ -10,7 +12,7 @@ const initialState = {
 
 const rootReducer = (state = initialState, action) => {
     switch (action.type) {
-        case actionTypes.LOAD_DATA:
+        case actionTypes.DOWNLOAD_DATA:
             return { ...state, data: action.payload };
         case actionTypes.UPDATE_NOTE_TITLE:
             const indexT = state.selectedNote;
@@ -24,7 +26,7 @@ const rootReducer = (state = initialState, action) => {
                 updatedNoteT,
                 ...state.data.slice(indexT + 1)
             ];
-
+            updateDatabase(updatedDataT);
             return {...state, data: updatedDataT};
         case actionTypes.UPDATE_NOTE_DESCRIPTION:
             const indexD = state.selectedNote;
@@ -38,7 +40,7 @@ const rootReducer = (state = initialState, action) => {
                 updatedNoteD,
                 ...state.data.slice(indexD + 1)
             ];
-
+            updateDatabase(updatedDataD);
             return {...state, data: updatedDataD}
         case actionTypes.TOGGLE_LOADING:
             return { ...state, loading: action.payload };
@@ -47,11 +49,20 @@ const rootReducer = (state = initialState, action) => {
         case actionTypes.SET_ERROR:
             return { ...state, loading: action.payload };
         case actionTypes.DELETE_NOTE:
-            const indexToDelete = state.selectedNote;
+            let indexToDelete = state.selectedNote;
             const updatedDataAfterDeletion = state.data.filter((_, index) => index !== indexToDelete);
-            return { ...state, data: updatedDataAfterDeletion };
+            // select another note
+            if (indexToDelete > 0) {
+                indexToDelete-=1
+            } else if (state.data.length > 1) {
+                indexToDelete = state.data.length-2;
+            } else {
+                indexToDelete = 0
+            }
+            updateDatabase(updatedDataAfterDeletion);
+            return { ...state, data: updatedDataAfterDeletion, selectedNote: indexToDelete };
         case actionTypes.CREATE_NOTE:
-            const newNote = {
+            const newNote: Note = {
                 title: "",
                 description: ""
             };

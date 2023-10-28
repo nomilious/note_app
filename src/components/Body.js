@@ -4,7 +4,7 @@ import {Col, Row, Spin, Alert} from 'antd';
 import { setLoading, setData, setError } from '../reduxStore/actions';
 import EditNote from "./EditNote"
 import ListNotes from "./ListNotes"
-import Note from "../note"
+import {defaultNotes, updateDatabase} from "../note"
 
 function Body() {
     const dispatch = useDispatch();
@@ -12,32 +12,27 @@ function Body() {
     const error = useSelector(state => state.error);
 
     useEffect(() => {
-        console.log("Fetching data from file...");
+        console.log('Fetching data from local storage...');
         dispatch(setLoading(true));
         dispatch(setData(null));
 
-        // TODO fix the error: if there is no file, it returns the index.html....
-        // Fetch data
-        fetch('./data.txt')
-            .then(response => response.text())
-            .then(fileContent => {
-                const rawArray = fileContent.split('\n')
-                    .map(note => note.replace(/\\n/g, '\n'));
-                const notesArray: Note = rawArray.map((note) => {
-                    const title = note.split("\n")[0]
-                    const lines = note.split("\n").slice(1);
-
-                    const description = lines.join("\n");
-                    return { title, description };
-                });
-                dispatch(setData(notesArray));
-                dispatch(setLoading(false));
-            })
-            .catch((error) => {
-                console.error('Error loading notes from file:', error);
-                dispatch(setError(error));
-                dispatch(setLoading(false));
-            });
+        // fetch data
+        try {
+            const storedData = localStorage.getItem('notes');
+            // get data from localstorage
+            if (storedData) {
+                dispatch(setData(JSON.parse(storedData)))
+            } else {
+                // If there are no notes in local storage, initialize with a default array
+                updateDatabase(defaultNotes)
+                dispatch(setData(defaultNotes));
+            }
+        } catch (error) {
+            console.error('Error loading notes from local storage:', error);
+            dispatch(setError(error));
+        } finally {
+            dispatch(setLoading(false));
+        }
     }, [dispatch])
 
     if (loading)

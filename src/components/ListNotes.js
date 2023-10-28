@@ -1,10 +1,9 @@
 import React from 'react';
 import { ConfigProvider, List, Typography, theme } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
-import { setSelectedNote } from '../reduxStore/actions';
+import {setSelectedNote} from '../reduxStore/actions';
 import './ListNotes.css'; // Import the CSS file for styling
 
-// TODO ensure that in the data.txt there is no empty lines
 function ListNotes() {
     const dispatch = useDispatch();
     const data = useSelector((state) => state.data);

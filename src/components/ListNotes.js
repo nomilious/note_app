@@ -37,14 +37,17 @@ function ListNotes() {
                                     </Typography.Paragraph>}
                                 description={
                                     <Typography.Paragraph ellipsis>
-                                        {/*if it's the same day as today, show only time*/}
-                                        <Typography.Text italic={true}>
+                                        {/*if it's the same day as today, show only time, else show date*/}
+                                        <Typography.Text>
                                             {
                                                 isSameDay(item.dateTime)
                                                 ? formatDateTime(item.dateTime).split(" ")[1]
-                                                :formatDateTime(item.dateTime)
+                                                :formatDateTime(item.dateTime).split(" ")[0]
                                             }
-                                        </Typography.Text> {item.description || 'Нет тела'}</Typography.Paragraph>
+                                        </Typography.Text >
+                                        <Typography.Text style={{color:"grey"}}> {item.description || 'Нет тела'}
+                                        </Typography.Text>
+                                    </Typography.Paragraph>
                                 }
                             />
                         </List.Item>

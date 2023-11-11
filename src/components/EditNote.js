@@ -1,77 +1,36 @@
 import React from "react";
-import {Card, Input, Button, Divider} from "antd";
 import { useSelector, useDispatch } from "react-redux";
-import {createNote, deleteNote, setSelectedNote, updateNoteDescription, updateNoteTitle} from "../reduxStore/actions";
-import {DeleteOutlined, FormOutlined} from "@ant-design/icons";
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css"; // import Quill styles
+import { updateNoteDescription } from "../reduxStore/actions";
 
 function EditNote() {
     const dispatch = useDispatch();
-    const selectedNote = useSelector((state) => state.selectedNote);
-    const data = useSelector((state) => state.data);
-    const note = data[selectedNote];
-    const isNewNoteEmpty = data[0].title === "" && data[0].description === "";
-    const cantDelete = data.length <=1;
 
-    // Handlers for inserting text into note
-    const handleDescriptionChange = (newDescription) => {
-        dispatch(updateNoteDescription(newDescription));
-    };
+    const note= useSelector(state => state.data[state.selectedNote]);
+    let toolbarOptions = [
+        [{ 'size': [] }],
+        ['bold', 'italic', 'underline', 'strike'],
+        ['blockquote', 'code-block'],
+        [{ 'font': [] }],
 
-    const handleTitleChange = (newTitle) => {
-        dispatch(updateNoteTitle(newTitle));
-    };
+        [{ 'list': 'ordered'}, { 'list': 'bullet' }],
 
-    // Handlers for buttons clicks
-    const createNewNote = () => {
-        dispatch(createNote())
-        dispatch(setSelectedNote(0))
-    }
-    const handleDeleteNote = () => {
-        dispatch(deleteNote(selectedNote));
-    };
+        ['clean']                                         // remove formatting button
+    ];
+
 
     return (
-        <div className="scrollable-container" style={{ borderRadius: 10, boxShadow: "0px 4px 20px rgba(0, 0, 0, 0.1)" }}>
-            <Card
-                title={
-                    <div style={{ display: "flex", alignItems: "center" }}>
-                        {/* Button for creating a new note */}
-                        <Button
-                            icon = {<FormOutlined />} type={"text"}
-                            style={{color: isNewNoteEmpty ? "#ccc" : "inherit" }}
-                            onClick={createNewNote} disabled={isNewNoteEmpty}
-                        >
-                            Создать
-                        </Button>
-                        {/* Button for deleting the selected note */}
-                        <Button
-                            icon={<DeleteOutlined />} danger type={"text"}
-                            style={{color: cantDelete ? "#ccc" : "inherit", marginLeft: "auto",}}
-                            onClick={handleDeleteNote} disabled={cantDelete}
-                        >
-                            Удалить
-                        </Button>
-                    </div>
-                }
-            >
-                {/* EDITABLE Field for note title. It can be edited!! */}
-                <Input
-                    value={note.title}
-                    placeholder={"Нет заголовка"}
-                    bordered={false}
-                    onChange={(e) => handleTitleChange(e.target.value)}
-                    style={{ marginBottom: 16, fontSize: "20px" }}
-                />
-                <Divider />
-                {/* EDITABLE Field for note description. It can be edited!! */}
-                <Input.TextArea
-                    value={note.description}
-                    placeholder={"Нет тела"}
-                    bordered={false}
-                    autoSize={true}
-                    onChange={(e) => handleDescriptionChange(e.target.value)}
-                />
-            </Card>
+        <div className="scrollable-container" style={{ borderRadius: 10, boxShadow: "0px 4px 20px rgba(0, 0, 0, 0.1)", minHeight: "20em"}}>
+            {/* ... (existing code remains unchanged) */}
+            {/* EDITABLE Field for note description using Quill editor */}
+            <ReactQuill
+                value={note.description}
+                onChange={newDescription => dispatch(updateNoteDescription(newDescription))}
+                modules={{
+                    toolbar: toolbarOptions, // Hide Quill's default toolbar
+                }}
+            />
         </div>
     );
 }

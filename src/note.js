@@ -1,23 +1,19 @@
 export interface Note {
-    title: string;
     description: string;
     // stores the creation date
     dateTime?: number;
 }
 export const defaultNotes: Note[] = [
     {
-        title: 'Приветствую вас!',
-        description: 'Спасибо, что открыли данное приложение!!',
-        dateTime: Date.now() // Setting current timestamp if not passed
-    },
-    {
-        title: 'What is Lorem Ipsum?',
-        description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. \nLorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.\n It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.',
+        description: '<p>Исследование изменений климата</p><p>Анализ данных за последние десять лет свидетельствует о стойком тренде изменения климата. Эта информация послужит основой для разработки стратегий борьбы с изменениями климата.</p',
         dateTime: Date.now()
     },
     {
-        title: 'Исследование изменений климата',
-        description: 'Анализ данных за последние десять лет свидетельствует о стойком тренде изменения климата. Эта информация послужит основой для разработки стратегий борьбы с изменениями климата.',
+        description: '<p>Приветствую вас!</p><p>Спасибо, что открыли данное приложение!!</p>',
+        dateTime: Date.now() // Setting current timestamp if not passed
+    },
+    {
+        description: '<p>What is Lorem Ipsum?<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. \nLorem Ipsum has been the industrys standard dummy text ever since the\n\n 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.\n It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.',
         dateTime: Date.now()
     },
 ];

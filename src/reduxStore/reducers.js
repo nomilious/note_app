@@ -68,7 +68,6 @@ const rootReducer = (state = initialState, action) => {
         case actionTypes.CREATE_NOTE:
             // Create a new empty note and add it to the beginning array
             const newNote: Note = {
-                title: "",
                 description: "",
                 dateTime: Date.now()
             };
